@@ -1,0 +1,8 @@
+main: org.nyanneko0113.craft_battle.CraftBattle
+version: 0.0.1_beta
+name: Craft_Battle
+
+commands:
+  craftbattle_start:
+    description: ゲーム開始
+    permission: craftbattle.commands.game_start

@@ -68,6 +68,7 @@ goto fail
 @rem Setup the command line
 
 set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+set DEFAULT_JVM_OPTS="-Dfile.encoding=UTF-8"
 
 
 @rem Execute Gradle
