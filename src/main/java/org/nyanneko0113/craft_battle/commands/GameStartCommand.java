@@ -13,7 +13,13 @@ public class GameStartCommand implements CommandExecutor {
     public boolean onCommand(CommandSender send, Command cmd, String s, String[] args) {
         if (cmd.getName().equalsIgnoreCase("craftbattle_start")) {
             send.sendMessage(TextUtil.TEXT_INFO + "ゲームを開始しています..");
-            GameManager.startGame();
+            int game = GameManager.startGame();
+            if (game == 1) {
+                send.sendMessage(TextUtil.TEXT_ERROR + "ゲームが実行中のため開始できませんでした。");
+            }
+            else if (game == 2) {
+                send.sendMessage(TextUtil.TEXT_ERROR + "不明なエラーが発生しました。");
+            }
         }
         return false;
     }

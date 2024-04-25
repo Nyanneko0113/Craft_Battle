@@ -37,6 +37,7 @@ public class GameManager {
                     }
                     else {
                         Bukkit.broadcastMessage(TextUtil.TEXT_INFO + "ゲーム開始!!");
+                        ScoreboardManager.setScoreboard(1);
                         this.cancel();
                     }
                 }
