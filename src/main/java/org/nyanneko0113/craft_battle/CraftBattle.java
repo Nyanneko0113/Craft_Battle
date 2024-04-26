@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.nyanneko0113.craft_battle.commands.GameStartCommand;
+import org.nyanneko0113.craft_battle.commands.GameCommand;
 import org.nyanneko0113.craft_battle.listener.PlayerCraftListener;
 import org.nyanneko0113.craft_battle.listener.PlayerJoinListener;
 import org.nyanneko0113.craft_battle.manager.GameManager;
@@ -18,7 +18,8 @@ public class CraftBattle extends JavaPlugin {
     public void onEnable() {
         PluginManager plm = getServer().getPluginManager();
 
-        getCommand("craftbattle_start").setExecutor(new GameStartCommand());
+        getCommand("craftbattle_start").setExecutor(new GameCommand());
+        getCommand("craftbattle_reset").setExecutor(new GameCommand());
 
         plm.registerEvents(new PlayerJoinListener(), this);
         plm.registerEvents(new PlayerCraftListener(), this);

@@ -12,4 +12,10 @@ public class BukkitUtil {
             player.playSound(player.getLocation(), sound, 50, 50);
         }
     }
+
+    public static void sendMessage(String message) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.sendMessage(message);
+        }
+    }
 }

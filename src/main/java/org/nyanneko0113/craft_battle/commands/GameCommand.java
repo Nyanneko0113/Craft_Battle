@@ -1,5 +1,6 @@
 package org.nyanneko0113.craft_battle.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -7,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.nyanneko0113.craft_battle.manager.GameManager;
 import org.nyanneko0113.craft_battle.util.TextUtil;
 
-public class GameStartCommand implements CommandExecutor {
+public class GameCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender send, Command cmd, String s, String[] args) {
@@ -20,6 +21,10 @@ public class GameStartCommand implements CommandExecutor {
             else if (game == 2) {
                 send.sendMessage(TextUtil.TEXT_ERROR + "不明なエラーが発生しました。");
             }
+        }
+        else if (cmd.getName().equalsIgnoreCase("craftbattle_reset")) {
+            send.sendMessage(TextUtil.TEXT_INFO + "ゲームを強制的にしています...");
+            GameManager.resetGame();
         }
         return false;
     }

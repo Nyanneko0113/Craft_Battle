@@ -20,10 +20,12 @@ public class PlayerCraftListener implements Listener {
         ItemStack item = event.getRecipe().getResult();
         Set<ItemStack> craft = GameManager.getCraftMap().get(player);
 
-        if (!craft.contains(item)) {
-            craft.add(item);
-            player.sendMessage(TextUtil.TEXT_INFO + "新しいアイテムをクラフトしました。" +
-                    "(現在: " + ChatColor.YELLOW + craft.size() + ChatColor.RESET + "ポイント)");
+        if (GameManager.statusGame().equals(GameManager.GameStatus.RUNNING)) {
+            if (!craft.contains(item)) {
+                craft.add(item);
+                player.sendMessage(TextUtil.TEXT_INFO + "新しいアイテムをクラフトしました。" +
+                        "(現在: " + ChatColor.YELLOW + craft.size() + ChatColor.RESET + "ポイント)");
+            }
         }
     }
 

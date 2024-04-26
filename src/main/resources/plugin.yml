@@ -6,3 +6,6 @@ commands:
   craftbattle_start:
     description: ゲーム開始
     permission: craftbattle.commands.game_start
+  craftbattle_reset:
+    description: ゲームを強制終了
+    permission: craftbattle.commands.game_start

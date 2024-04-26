@@ -36,8 +36,8 @@ public class GameManager {
                         count_time--;
                     }
                     else {
-                        Bukkit.broadcastMessage(TextUtil.TEXT_INFO + "ゲーム開始!!");
                         ScoreboardManager.setScoreboard(1);
+                        Bukkit.broadcastMessage(TextUtil.TEXT_INFO + "ゲーム開始!!");
                         this.cancel();
                     }
                 }
@@ -66,7 +66,7 @@ public class GameManager {
                             if (point != null) {
                                 game_board.resetScores(point);
                             }
-                            point = (ChatColor.RED + "ポイント： " + craft_map.get(player).size());
+                            point = (ChatColor.RED + "ポイント： " + ChatColor.YELLOW + craft_map.get(player).size());
                             game_obj.getScore(point).setScore(26);
 
                             player.setScoreboard(ScoreboardManager.getScoreboard(player));
@@ -79,8 +79,12 @@ public class GameManager {
 
                         //ゲーム終了
                         if (game_time == 0) {
-                            Bukkit.broadcastMessage(TextUtil.TEXT_INFO + "ゲーム終了!!");
                             ScoreboardManager.setScoreboard(2);
+                            Bukkit.broadcastMessage(TextUtil.TEXT_INFO + "ゲーム終了!!");
+                            for (Player player : Bukkit.getOnlinePlayers()) {
+                                Set<ItemStack> craft = GameManager.getCraftMap().get(player);
+                                player.sendMessage(TextUtil.TEXT_INFO + "あなたのクラフト数は" + craft.size() + "でした。");
+                            }
                             this.cancel();
                         }
 
@@ -101,6 +105,18 @@ public class GameManager {
             return 2;
         }
         return 2;
+    }
+
+    public static void resetGame() {
+        Bukkit.getScheduler().cancelTasks(CraftBattle.getInstance());
+        count_time=0;
+        game_time=0;
+        ScoreboardManager.setScoreboard(2);
+        Bukkit.broadcastMessage(TextUtil.TEXT_INFO + "ゲームは強制終了されました。");
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            Set<ItemStack> craft = GameManager.getCraftMap().get(player);
+            player.sendMessage(TextUtil.TEXT_INFO + "あなたのクラフト数は" + craft.size() + "でした。");
+        }
     }
 
     public static Map<Player, Set<ItemStack>> getCraftMap() {

@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -11,6 +12,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class ScoreboardManager {
 
@@ -67,11 +69,16 @@ public class ScoreboardManager {
             game_obj.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
         else if (type == 2) {
-            //ゲーム終了後
-            game_obj.getScore(" ").setScore(29);
-            game_obj.getScore("ゲーム終了!!").setScore(28);
-            game_obj.getScore("   ").setScore(27);
-            game_obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                Set<ItemStack> craft = GameManager.getCraftMap().get(player);
+
+                //ゲーム終了後
+                game_obj.getScore(" ").setScore(29);
+                game_obj.getScore("ゲーム終了!!").setScore(28);
+                game_obj.getScore("   ").setScore(27);
+                game_obj.getScore(ChatColor.RED + "ポイント： " + ChatColor.YELLOW + craft.size());
+                game_obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+            }
         }
     }
 
